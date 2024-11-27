@@ -13,6 +13,11 @@ npm install
 npm start
 ```
 
+- run the bot for developer
+```
+npm run dev
+```
+
 - create `.env` file to put some variable
   - token: go to [Discord Developer Portal](https://discord.com/developers/applications) -> your bot -> Bot -> clicking "Reset Token" and copy it
   - clientId: go to [Discord Developer Portal](https://discord.com/developers/applications) -> your bot -> General Information -> copy "application id"
