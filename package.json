@@ -16,7 +16,7 @@
         "node": ">=18"
     },
     "repository": {
-        "url": "https://glitch.com/edit/#!/discord-bot-workshop"
+        "url": "https://github.com/mikkipastel/discord-bot-workshop"
     },
     "license": "MIT",
     "keywords": [
