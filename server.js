@@ -1,18 +1,35 @@
 require('dotenv').config();
 
 // Require the necessary discord.js classes
-const { Client, Events, GatewayIntentBits, Routes, EmbedBuilder } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Routes } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
+// Load json static beta
+const animals = require('./data/animal.json');
+
 // map command list
 const commands = [
 	new SlashCommandBuilder()
 		.setName('ping')
-		.setDescription('Replies with Pong!')
+		.setDescription('Replies with Pong!'),
+	new SlashCommandBuilder()
+		.setName('animal')
+		.setDescription('Encyclopedia animal')
+		.addStringOption(option =>
+			option.setName('animal')
+				.setDescription('role category')
+				.setRequired(true)
+				.addChoices(
+					{ name: 'Hippopotamus', value: 'Hippopotamus'},
+					{ name: 'Tiger', value: 'Tiger'},
+					{ name: 'Asian Elephant', value: 'Asian Elephant'},
+					{ name: 'Capybara', value: 'Capybara'},
+				)
+		),
   ].map(command => command.toJSON());
   
   // register command
@@ -37,6 +54,10 @@ client.on('interactionCreate', async interaction => {
 	if (commandName === 'ping') {
 		const timeTaken = Date.now() - interaction.createdTimestamp;
 		await interaction.reply(`Pong! This message had a latency of ${timeTaken}ms.`);
+	} else if (commandName === 'animal') {
+		const animalInput = interaction.options.getString('animal');
+		const animalOutput = animals.find(animal => animal.name_en == animalInput);
+		await interaction.reply(animalOutput.name_th);
 	}
 });
 
