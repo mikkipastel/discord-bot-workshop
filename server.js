@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 // Require the necessary discord.js classes
-const { Client, Events, GatewayIntentBits, Routes, EmbedBuilder } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Routes, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 
@@ -72,7 +72,12 @@ client.on('interactionCreate', async interaction => {
 			.setImage(animalOutput.image_url)
 			.setTimestamp()
 			.setFooter({ text: '❤️', iconURL: "https://i.imgur.com/dxeXsqc.jpeg" });
-		await interaction.reply({ embeds: [embed] });
+		const button = new ButtonBuilder()
+            .setLabel('ข้อมูลเพิ่มเติม')
+            .setStyle(ButtonStyle.Link)
+            .setURL(animalOutput.reference_url);
+        const row = new ActionRowBuilder().addComponents(button);
+        await interaction.reply({ embeds: [embed], components: [row] });
 	}
 });
 
