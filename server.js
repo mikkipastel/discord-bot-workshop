@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 // Require the necessary discord.js classes
-const { Client, Events, GatewayIntentBits, Routes } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Routes, EmbedBuilder } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 
@@ -57,7 +57,22 @@ client.on('interactionCreate', async interaction => {
 	} else if (commandName === 'animal') {
 		const animalInput = interaction.options.getString('animal');
 		const animalOutput = animals.find(animal => animal.name_en == animalInput);
-		await interaction.reply(animalOutput.name_th);
+		const embed = new EmbedBuilder()
+			.setColor(0x0099FF)
+			.setTitle(animalOutput.name_en)
+			.setURL(animalOutput.reference_url)
+			.setAuthor({ name: 'zookeeper', iconURL: "https://i.imgur.com/dxeXsqc.jpeg", url: 'https://khaokheow.zoothailand.org/intro.php' })
+			.setDescription(animalOutput.description)
+			.setThumbnail(animalOutput.image_url)
+			.addFields(
+				{ name: 'Scientific Name', value: animalOutput.scientific_name, inline: true },
+				{ name: 'Food', value: animalOutput.diet },
+				{ name: 'Zoo Place', value: animalOutput.place, inline: true },
+			)
+			.setImage(animalOutput.image_url)
+			.setTimestamp()
+			.setFooter({ text: '❤️', iconURL: "https://i.imgur.com/dxeXsqc.jpeg" });
+		await interaction.reply({ embeds: [embed] });
 	}
 });
 
