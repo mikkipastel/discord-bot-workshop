@@ -1,12 +1,15 @@
 require('dotenv').config();
 
 // Require the necessary discord.js classes
-const { Client, Events, GatewayIntentBits, Routes, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Routes, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, WebhookClient } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+// Add Webhook event
+const webhookClient = new WebhookClient({ url: 'https://discord.com/api/webhooks/1311693709011718175/IQ0QSZeUXvdlgkQmx0Wc51eKX4XkKXRVZTcXCvxJGHQS3s0livezDj3-e816ZM7Cwn4Y' });
 
 // Load json static beta
 const animals = require('./data/animal.json');
@@ -43,6 +46,17 @@ const commands = [
 // It makes some properties non-nullable.
 client.once(Events.ClientReady, readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+
+	// send message webhook
+	try {
+		webhookClient.send({
+			username: 'BB-8',
+			avatarURL: 'https://i.imgur.com/PHnLYAm.png',
+			content: 'Webhook test',
+		})
+	} catch (error) {
+		common.error('Error trying to send: ', error);
+	}
 });
 
 // Reply Command
