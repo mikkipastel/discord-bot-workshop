@@ -9,7 +9,7 @@ const { REST } = require('@discordjs/rest');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 // Add Webhook event
-const webhookClient = new WebhookClient({ url: 'https://discord.com/api/webhooks/1311693709011718175/IQ0QSZeUXvdlgkQmx0Wc51eKX4XkKXRVZTcXCvxJGHQS3s0livezDj3-e816ZM7Cwn4Y' });
+const webhookClient = new WebhookClient({ url: process.env.webhookUrl });
 
 // Load json static beta
 const animals = require('./data/animal.json');
