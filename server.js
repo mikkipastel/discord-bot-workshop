@@ -49,10 +49,15 @@ client.once(Events.ClientReady, readyClient => {
 
 	// send message webhook
 	try {
+		const embed = new EmbedBuilder()
+		    .setTitle('Some Title')
+	        .setColor(0x00FFFF);
+
 		webhookClient.send({
 			username: 'BB-8',
 			avatarURL: 'https://i.imgur.com/PHnLYAm.png',
 			content: 'Webhook test',
+			embeds: [embed]
 		})
 	} catch (error) {
 		common.error('Error trying to send: ', error);
