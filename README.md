@@ -22,3 +22,6 @@ npm run dev
   - token: go to [Discord Developer Portal](https://discord.com/developers/applications) -> your bot -> Bot -> clicking "Reset Token" and copy it
   - clientId: go to [Discord Developer Portal](https://discord.com/developers/applications) -> your bot -> General Information -> copy "application id"
   - guildId: right click your server in Discord -> server Settings -> Widget -> copy "server id"
+
+## Slide
+https://docs.google.com/presentation/d/1VVan98YNYIRvQkCbw6HmZvxM-bIeojawGDnhCELMU_o/edit?usp=sharing
